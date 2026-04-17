@@ -1,0 +1,29 @@
+{
+  "overview": "Nexiqo is a dark-themed social media app centered on short video reels, a smart AI-powered feed, and real-time connections. It features a premium blue-to-purple gradient design with glass morphism UI, bottom navigation across Home, Reels, Friends, and Chat, plus a full onboarding and authentication flow.",
+  "features": [
+    "Splash screen with dark gradient and logo",
+    "3-screen onboarding carousel",
+    "Login and signup with email/phone/username",
+    "Smart home feed with stories and mixed content",
+    "Full-screen reels player with swipe navigation",
+    "Bottom navigation: Home, Reels, Create, Friends, Chat",
+    "Create button with glow effect and action menu",
+    "Friends screen with suggestions and follow/unfollow",
+    "Chat list with online status",
+    "Profile screen with cover photo, bio, stats, and tabs",
+    "Notifications feed grouped by type",
+    "Premium dark design: blue→purple gradient, glass morphism, neon accents"
+  ],
+  "category": "social-media",
+  "tags": [
+    "social",
+    "reels",
+    "video",
+    "dark-theme",
+    "mobile",
+    "feed",
+    "chat",
+    "friends"
+  ],
+  "last_updated": "2026-04-16T16:38:41.170Z"
+}

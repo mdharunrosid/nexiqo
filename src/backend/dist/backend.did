@@ -1,0 +1,140 @@
+type UserProfile = 
+ record {
+   bio: text;
+   coverPhoto: text;
+   displayName: text;
+   followerCount: nat;
+   followingCount: nat;
+   id: UserId;
+   isOnline: bool;
+   isPrivate: bool;
+   postCount: nat;
+   profilePic: text;
+   username: text;
+ };
+type UserId = principal;
+type Timestamp = int;
+type StoryId = nat;
+type Story = 
+ record {
+   authorId: UserId;
+   expiresAt: Timestamp;
+   id: StoryId;
+   mediaUrl: text;
+ };
+type PostType = 
+ variant {
+   image;
+   reel;
+   "text";
+ };
+type PostId = nat;
+type Post = 
+ record {
+   authorId: UserId;
+   caption: text;
+   commentCount: nat;
+   content: text;
+   createdAt: Timestamp;
+   id: PostId;
+   imageUrl: text;
+   likeCount: nat;
+   reelUrl: text;
+   shareCount: nat;
+   "type": PostType;
+ };
+type NotificationType = 
+ variant {
+   comment;
+   follow;
+   like;
+   live;
+ };
+type NotificationId = nat;
+type Notification = 
+ record {
+   actorId: UserId;
+   createdAt: Timestamp;
+   entityId: nat;
+   id: NotificationId;
+   isRead: bool;
+   "type": NotificationType;
+   userId: UserId;
+ };
+type MessageId = nat;
+type Message = 
+ record {
+   content: text;
+   conversationId: ConversationId;
+   createdAt: Timestamp;
+   id: MessageId;
+   senderId: UserId;
+ };
+type FriendSuggestion = 
+ record {
+   displayName: text;
+   mutualFollowers: nat;
+   profilePic: text;
+   userId: UserId;
+   username: text;
+ };
+type CreatePostRequest = 
+ record {
+   caption: text;
+   content: text;
+   imageUrl: text;
+   reelUrl: text;
+   "type": PostType;
+ };
+type ConversationPreview = 
+ record {
+   id: ConversationId;
+   isOtherOnline: bool;
+   lastMessage: opt text;
+   lastMessageAt: opt Timestamp;
+   otherProfilePic: text;
+   otherUserId: UserId;
+   otherUsername: text;
+ };
+type ConversationId = nat;
+type Conversation = 
+ record {
+   id: ConversationId;
+   lastMessage: opt text;
+   lastMessageAt: opt Timestamp;
+   participants: vec UserId;
+ };
+service : {
+  createPost: (req: CreatePostRequest) -> (Post);
+  createStory: (mediaUrl: text, expiresAt: Timestamp) -> (Story);
+  follow: (targetId: UserId) -> (bool);
+  getActiveStories: () -> (vec Story) query;
+  getConversations: () -> (vec ConversationPreview) query;
+  getFeedPosts: (limit: nat, offset: nat) -> (vec Post) query;
+  getFollowers: (userId: UserId) -> (vec UserProfile) query;
+  getFollowing: (userId: UserId) -> (vec UserProfile) query;
+  getFriendSuggestions: (limit: nat) -> (vec FriendSuggestion) query;
+  getMessages: (conversationId: ConversationId, limit: nat, offset: nat) ->
+   (vec Message) query;
+  getMyNotifications: (limit: nat, offset: nat) -> (vec Notification) query;
+  getMyProfile: () -> (opt UserProfile) query;
+  getPost: (postId: PostId) -> (opt Post) query;
+  getProfile: (userId: UserId) -> (opt UserProfile) query;
+  getReelById: (reelId: PostId) -> (opt Post) query;
+  getTrendingReels: (limit: nat) -> (vec Post) query;
+  getUnreadNotificationCount: () -> (nat) query;
+  getUserStories: (userId: UserId) -> (vec Story) query;
+  isFollowing: (follower: UserId, followee: UserId) -> (bool) query;
+  likePost: (postId: PostId) -> (bool);
+  likeReel: (reelId: PostId) -> (bool);
+  markAllNotificationsRead: () -> (nat);
+  markNotificationRead: (notificationId: NotificationId) -> (bool);
+  registerUser: (username: text, displayName: text) -> (bool);
+  sendMessage: (conversationId: ConversationId, content: text) -> (Message);
+  setOnlineStatus: (isOnline: bool) -> ();
+  shareReel: (reelId: PostId) -> (bool);
+  startConversation: (otherUserId: UserId) -> (Conversation);
+  unfollow: (targetId: UserId) -> (bool);
+  updateProfile: (username: text, displayName: text, bio: text, profilePic:
+   text, coverPhoto: text, isPrivate: bool) -> (bool);
+}

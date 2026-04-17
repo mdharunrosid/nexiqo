@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "General Sans", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --radius: 1rem;
+
+    --background: 0.99 0 0;
+    --foreground: 0.15 0 0;
+    --card: 1.0 0 0;
+    --card-foreground: 0.15 0 0;
+    --popover: 1.0 0 0;
+    --popover-foreground: 0.15 0 0;
+
+    --primary: 0.65 0.18 240;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.5 0.2 290;
+    --secondary-foreground: 0.98 0 0;
+    --muted: 0.95 0 0;
+    --muted-foreground: 0.5 0 0;
+
+    --accent: 0.65 0.18 240;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.9 0 0;
+    --input: 0.9 0 0;
+    --ring: 0.65 0.18 240;
+
+    --chart-1: 0.65 0.18 240;
+    --chart-2: 0.5 0.2 290;
+    --chart-3: 0.65 0.18 130;
+    --chart-4: 0.55 0.22 25;
+    --chart-5: 0.77 0.19 70;
+
+    --sidebar: 0.98 0 0;
+    --sidebar-foreground: 0.15 0 0;
+    --sidebar-primary: 0.65 0.18 240;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.95 0 0;
+    --sidebar-accent-foreground: 0.25 0 0;
+    --sidebar-border: 0.9 0 0;
+    --sidebar-ring: 0.65 0.18 240;
+  }
+
+  .dark {
+    --background: 0.078 0 0;
+    --foreground: 0.95 0 0;
+    --card: 0.105 0 0;
+    --card-foreground: 0.95 0 0;
+    --popover: 0.15 0 0;
+    --popover-foreground: 0.95 0 0;
+
+    --primary: 0.65 0.18 240;
+    --primary-foreground: 0.078 0 0;
+
+    --secondary: 0.5 0.2 290;
+    --secondary-foreground: 0.95 0 0;
+    --muted: 0.22 0 0;
+    --muted-foreground: 0.55 0 0;
+
+    --accent: 0.65 0.18 240;
+    --accent-foreground: 0.078 0 0;
+
+    --destructive: 0.65 0.19 22;
+    --destructive-foreground: 0.078 0 0;
+
+    --border: 0.15 0 0;
+    --input: 0.15 0 0;
+    --ring: 0.65 0.18 240;
+
+    --chart-1: 0.65 0.18 240;
+    --chart-2: 0.5 0.2 290;
+    --chart-3: 0.65 0.18 130;
+    --chart-4: 0.55 0.22 25;
+    --chart-5: 0.65 0.25 16;
+
+    --sidebar: 0.105 0 0;
+    --sidebar-foreground: 0.95 0 0;
+    --sidebar-primary: 0.65 0.18 240;
+    --sidebar-primary-foreground: 0.078 0 0;
+    --sidebar-accent: 0.22 0 0;
+    --sidebar-accent-foreground: 0.85 0 0;
+    --sidebar-border: 0.15 0 0;
+    --sidebar-ring: 0.65 0.18 240;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    color-scheme: dark;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-weight: 400 500 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-effect {
+    background-color: oklch(var(--card) / 0.7);
+    border-color: oklch(var(--border) / 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: var(--radius);
+  }
+
+  .gradient-accent {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .button-interactive {
+    @apply transition-smooth hover:scale-105 active:scale-95;
+  }
+
+  .card-elevated {
+    background-color: oklch(var(--card));
+    border-color: oklch(var(--border) / 0.3);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 24px oklch(0 0 0 / 0.3);
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 20px oklch(0.65 0.18 240 / 0.5), 0 0 40px
+      oklch(0.5 0.2 290 / 0.25);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.65 0.18 240),
+      oklch(0.5 0.2 290)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
